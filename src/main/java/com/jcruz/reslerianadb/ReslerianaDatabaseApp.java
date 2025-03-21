@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReslerianaDatabaseApp {
 
-	@RequestMapping("/")
-	public String home() {
-		return "hello";
-	}
-
     public static void main(String[] args) {
         SpringApplication.run(ReslerianaDatabaseApp.class, args);
     }
