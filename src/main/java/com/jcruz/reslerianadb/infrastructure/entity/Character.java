@@ -1,70 +1,98 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "\"CHARACTER\"")
 public class Character extends BaseEntity implements Serializable {
 
-    @Column(nullable = false, name = "NAME")
-    private String name;
+    @Id
+    @Column(nullable = false, name = "EXT_ID")
+    private int extId;
 
-    @Column(nullable = false, name = "ANOTHER_NAME")
-    private String anotherName;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
+    private Translation name;
 
-    @Column(nullable = false, name = "FULL_NAME")
-    private String fullName;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ANOTHER_NAME", referencedColumnName = "TL_ID")
+    private Translation anotherName;
 
-    @Column(nullable = false, name = "ACQUISITION_TEXT")
-    private String acquisitionText;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FULL_NAME", referencedColumnName = "TL_ID")
+    private Translation fullName;
 
-    @Column(nullable = false, name = "DESCRIPTION")
-    private String description;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ACQUISITION_TEXT", referencedColumnName = "TL_ID")
+    private Translation acquisitionText;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
+    private Translation description;
 
     @Column(nullable = false, name = "IS_ALCHEMIST")
     private boolean alchemist;
 
-    public String getName() {
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "RELEASE_DATE")
+    private Date releaseDate;
+
+    @Column(nullable = false, name = "INITIAL_RARITY")
+    private int initialRarity;
+
+    @Column(nullable = false, name = "ATTACK_ATTRIBUTE")
+    private String attackAttribute;
+
+    public int getExtId() {
+        return extId;
+    }
+
+    public void setExtId(int extId) {
+        this.extId = extId;
+    }
+
+    public Translation getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Translation name) {
         this.name = name;
     }
 
-    public String getAnotherName() {
+    public Translation getAnotherName() {
         return anotherName;
     }
 
-    public void setAnotherName(String anotherName) {
+    public void setAnotherName(Translation anotherName) {
         this.anotherName = anotherName;
     }
 
-    public String getFullName() {
+    public Translation getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
+    public void setFullName(Translation fullName) {
         this.fullName = fullName;
     }
 
-    public String getAcquisitionText() {
+    public Translation getAcquisitionText() {
         return acquisitionText;
     }
 
-    public void setAcquisitionText(String acquisitionText) {
+    public void setAcquisitionText(Translation acquisitionText) {
         this.acquisitionText = acquisitionText;
     }
 
-    public String getDescription() {
+    public Translation getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Translation description) {
         this.description = description;
     }
 
@@ -74,5 +102,29 @@ public class Character extends BaseEntity implements Serializable {
 
     public void setAlchemist(boolean alchemist) {
         this.alchemist = alchemist;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public int getInitialRarity() {
+        return initialRarity;
+    }
+
+    public void setInitialRarity(int initialRarity) {
+        this.initialRarity = initialRarity;
+    }
+
+    public String getAttackAttribute() {
+        return attackAttribute;
+    }
+
+    public void setAttackAttribute(String attackAttribute) {
+        this.attackAttribute = attackAttribute;
     }
 }

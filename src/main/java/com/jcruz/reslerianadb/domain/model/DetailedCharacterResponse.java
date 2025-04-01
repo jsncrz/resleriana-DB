@@ -2,11 +2,11 @@ package com.jcruz.reslerianadb.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record CharacterResponse(@JsonProperty("name") String name, @JsonProperty("anotherName") String anotherName,
-                                @JsonProperty("fullName") String fullName,
-                                @JsonProperty("acquisitionText") String acquisitionText,
-                                @JsonProperty("description") String description,
-                                @JsonProperty("alchemist") boolean alchemist) {
+public record DetailedCharacterResponse(@JsonProperty("name") String name, @JsonProperty("anotherName") String anotherName,
+                                        @JsonProperty("fullName") String fullName,
+                                        @JsonProperty("acquisitionText") String acquisitionText,
+                                        @JsonProperty("description") String description,
+                                        @JsonProperty("alchemist") boolean alchemist) {
 
     public static final class Builder {
         String name;
@@ -46,8 +46,8 @@ public record CharacterResponse(@JsonProperty("name") String name, @JsonProperty
             return this;
         }
 
-        public CharacterResponse build() {
-            return new CharacterResponse(name,
+        public DetailedCharacterResponse build() {
+            return new DetailedCharacterResponse(name,
                     anotherName,
                     fullName,
                     acquisitionText,

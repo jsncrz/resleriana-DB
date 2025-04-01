@@ -8,10 +8,6 @@ import java.util.Date;
 @MappedSuperclass
 public class BaseEntity {
 
-    @Id
-    @Column(name = "ID")
-    private int id;
-
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false, name = "CREATE_DATE")
@@ -34,14 +30,6 @@ public class BaseEntity {
     @PreUpdate
     public void onPreUpdate() {
         setUpdateDate(new Date());
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Date getCreateDate() {
