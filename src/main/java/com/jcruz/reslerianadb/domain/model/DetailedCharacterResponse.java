@@ -2,7 +2,8 @@ package com.jcruz.reslerianadb.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record DetailedCharacterResponse(@JsonProperty("name") String name, @JsonProperty("anotherName") String anotherName,
+public record DetailedCharacterResponse(@JsonProperty("name") String name,
+                                        @JsonProperty("anotherName") String anotherName,
                                         @JsonProperty("fullName") String fullName,
                                         @JsonProperty("acquisitionText") String acquisitionText,
                                         @JsonProperty("description") String description,
@@ -48,7 +49,7 @@ public record DetailedCharacterResponse(@JsonProperty("name") String name, @Json
 
         public DetailedCharacterResponse build() {
             return new DetailedCharacterResponse(name,
-                    anotherName,
+                            anotherName,
                     fullName,
                     acquisitionText,
                     description,

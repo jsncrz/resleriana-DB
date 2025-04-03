@@ -45,6 +45,9 @@ public class Character extends BaseEntity implements Serializable {
     @Column(nullable = false, name = "INITIAL_RARITY")
     private int initialRarity;
 
+    @Column(nullable = false, name = "ROLE")
+    private String role;
+
     @Column(nullable = false, name = "ATTACK_ATTRIBUTE")
     private String attackAttribute;
 
@@ -118,6 +121,14 @@ public class Character extends BaseEntity implements Serializable {
 
     public void setInitialRarity(int initialRarity) {
         this.initialRarity = initialRarity;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getAttackAttribute() {
