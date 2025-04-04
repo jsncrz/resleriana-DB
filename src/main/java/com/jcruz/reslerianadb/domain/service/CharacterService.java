@@ -1,11 +1,10 @@
 package com.jcruz.reslerianadb.domain.service;
 
-import com.jcruz.reslerianadb.domain.model.DetailedCharacterResponse;
-import com.jcruz.reslerianadb.domain.model.SimpleCharacterResponse;
+import com.jcruz.reslerianadb.domain.model.CharacterResponse;
 
 import java.util.List;
 
 public interface CharacterService {
-    List<SimpleCharacterResponse> getCharacters();
-    DetailedCharacterResponse getCharacter(int id);
+    List<CharacterResponse> getCharactersByLocale(String locale);
+    CharacterResponse getCharacter(int id);
 }

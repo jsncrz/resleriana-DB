@@ -14,23 +14,23 @@ public class Character extends BaseEntity implements Serializable {
     @Column(nullable = false, name = "EXT_ID")
     private int extId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
     private Translation name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ANOTHER_NAME", referencedColumnName = "TL_ID")
     private Translation anotherName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "FULL_NAME", referencedColumnName = "TL_ID")
     private Translation fullName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "ACQUISITION_TEXT", referencedColumnName = "TL_ID")
     private Translation acquisitionText;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
     private Translation description;
 

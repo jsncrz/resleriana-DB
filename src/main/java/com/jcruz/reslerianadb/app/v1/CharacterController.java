@@ -1,12 +1,8 @@
 package com.jcruz.reslerianadb.app.v1;
 
-import com.jcruz.reslerianadb.domain.model.DetailedCharacterResponse;
-import com.jcruz.reslerianadb.domain.model.SimpleCharacterResponse;
+import com.jcruz.reslerianadb.domain.model.CharacterResponse;
 import com.jcruz.reslerianadb.domain.service.CharacterServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,12 +17,12 @@ public class CharacterController {
     }
 
     @GetMapping
-    public List<SimpleCharacterResponse> getCharacters() {
-        return this.characterService.getCharacters();
+    public List<CharacterResponse> getCharacters(@RequestParam(defaultValue = "en") String locale) {
+        return this.characterService.getCharactersByLocale(locale);
     }
 
     @GetMapping(value="/{id}")
-    public DetailedCharacterResponse getCharacter(@PathVariable("id") int id) {
+    public CharacterResponse getCharacter(@PathVariable("id") int id) {
         return this.characterService.getCharacter(id);
     }
 }

@@ -2,8 +2,7 @@ package com.jcruz.reslerianadb.domain.service;
 
 import com.jcruz.reslerianadb.common.exception.InternalServerError;
 import com.jcruz.reslerianadb.common.exception.NotFoundException;
-import com.jcruz.reslerianadb.domain.model.DetailedCharacterResponse;
-import com.jcruz.reslerianadb.domain.model.SimpleCharacterResponse;
+import com.jcruz.reslerianadb.domain.model.CharacterResponse;
 import com.jcruz.reslerianadb.infrastructure.entity.Character;
 import com.jcruz.reslerianadb.infrastructure.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +23,23 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public List<SimpleCharacterResponse> getCharacters() {
+    public List<CharacterResponse> getCharactersByLocale(String locale) {
         List<Character> characters;
         try {
-            characters = this.characterRepository.findAll();
+            characters = this.characterRepository.findSimpleByLocale(locale);
         } catch (Exception ex) {
             throw new InternalServerError(ex);
         }
 
-        List<SimpleCharacterResponse> res = new ArrayList<>();
+        List<CharacterResponse> res = new ArrayList<>();
         for (Character c : characters) {
-            res.add(new SimpleCharacterResponse.Builder()
+            res.add(new CharacterResponse.Builder()
+                    .id(c.getExtId())
                     .name(c.getName().getText())
                     .anotherName(c.getAnotherName().getText())
                     .initialRarity(c.getInitialRarity())
                     .attackAttribute(c.getAttackAttribute())
+                    .role(c.getRole())
                     .alchemist(c.isAlchemist())
                     .build());
         }
@@ -46,7 +47,7 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public DetailedCharacterResponse getCharacter(int id) {
+    public CharacterResponse getCharacter(int id) {
         Character c;
         try {
             Optional<Character> optC = this.characterRepository.findById(id);
@@ -58,13 +59,16 @@ public class CharacterServiceImpl implements CharacterService {
         } catch (Exception ex) {
             throw new InternalServerError(ex);
         }
-        return new DetailedCharacterResponse.Builder()
-                        .name(c.getName().getText())
-                        .anotherName(c.getAnotherName().getText())
-                        .fullName(c.getFullName().getText())
-                        .description(c.getDescription().getText())
-                        .acquisitionText(c.getAcquisitionText().getText())
-                        .alchemist(c.isAlchemist())
-                        .build();
+        return new CharacterResponse.Builder()
+                .name(c.getName().getText())
+                .anotherName(c.getAnotherName().getText())
+                .fullName(c.getFullName().getText())
+                .description(c.getDescription().getText())
+                .acquisitionText(c.getAcquisitionText().getText())
+                .initialRarity(c.getInitialRarity())
+                .attackAttribute(c.getAttackAttribute())
+                .role(c.getRole())
+                .alchemist(c.isAlchemist())
+                .build();
     }
 }
