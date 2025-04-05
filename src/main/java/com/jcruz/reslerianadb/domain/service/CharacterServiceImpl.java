@@ -50,7 +50,7 @@ public class CharacterServiceImpl implements CharacterService {
     public CharacterResponse getCharacter(int id) {
         Character c;
         try {
-            Optional<Character> optC = this.characterRepository.findById(id);
+            Optional<Character> optC = this.characterRepository.findByExtIdAndLocale(id, "jp");
             if (optC.isEmpty()) {
                 throw new NotFoundException(Character.class.getName(), id);
             } else {
@@ -60,6 +60,7 @@ public class CharacterServiceImpl implements CharacterService {
             throw new InternalServerError(ex);
         }
         return new CharacterResponse.Builder()
+                .id(c.getExtId())
                 .name(c.getName().getText())
                 .anotherName(c.getAnotherName().getText())
                 .fullName(c.getFullName().getText())
