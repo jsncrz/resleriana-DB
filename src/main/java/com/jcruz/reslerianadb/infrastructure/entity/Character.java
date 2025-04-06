@@ -8,11 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "\"CHARACTER\"")
-public class Character extends BaseEntity implements Serializable {
-
-    @Id
-    @Column(nullable = false, name = "EXT_ID")
-    private int extId;
+public class Character extends BaseEntityWithExtId implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
@@ -50,14 +46,6 @@ public class Character extends BaseEntity implements Serializable {
 
     @Column(nullable = false, name = "ATTACK_ATTRIBUTE")
     private String attackAttribute;
-
-    public int getExtId() {
-        return extId;
-    }
-
-    public void setExtId(int extId) {
-        this.extId = extId;
-    }
 
     public Translation getName() {
         return name;
