@@ -37,6 +37,7 @@ public class CharacterStatsServiceImpl implements CharacterStatsService {
         }
         return new CharacterStatsResponse.Builder()
                 .attack(c.getAttack())
+                .magic(c.getMagic())
                 .hp(c.getHp())
                 .defense(c.getDefense())
                 .mental(c.getMental())
