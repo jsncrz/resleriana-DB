@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "\"CHARACTER_STATS\"")
+@Table(name = "CHARACTER_STATS")
 public class CharacterStats extends BaseEntityWithExtId implements Serializable {
 
     @Column(nullable = false, name = "ATTACK")

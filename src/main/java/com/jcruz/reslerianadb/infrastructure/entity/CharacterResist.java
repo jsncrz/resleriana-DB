@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "\"CHARACTER_RESIST\"")
+@Table(name = "CHARACTER_RESIST")
 public class CharacterResist extends BaseEntityWithExtId implements Serializable {
 
     @Column(nullable = false, name = "FIRE")

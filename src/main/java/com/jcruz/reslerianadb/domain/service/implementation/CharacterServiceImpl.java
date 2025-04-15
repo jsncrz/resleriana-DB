@@ -1,8 +1,9 @@
-package com.jcruz.reslerianadb.domain.service;
+package com.jcruz.reslerianadb.domain.service.implementation;
 
 import com.jcruz.reslerianadb.common.exception.InternalServerError;
 import com.jcruz.reslerianadb.common.exception.NotFoundException;
 import com.jcruz.reslerianadb.domain.model.CharacterResponse;
+import com.jcruz.reslerianadb.domain.service.CharacterService;
 import com.jcruz.reslerianadb.infrastructure.entity.Character;
 import com.jcruz.reslerianadb.infrastructure.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +48,17 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public CharacterResponse getCharacter(int id) {
+    public CharacterResponse getCharacter(int id, String locale) {
         Character c;
         try {
-            Optional<Character> optC = this.characterRepository.findByExtIdAndLocale(id, "jp");
+            Optional<Character> optC = this.characterRepository.findByExtIdAndLocale(id, locale);
             if (optC.isEmpty()) {
-                throw new NotFoundException(Character.class.getName(), id);
-            } else {
-                c = optC.get();
+                optC = this.characterRepository.findByExtIdAndLocale(id, "jp");
+                if (optC.isEmpty()) {
+                    throw new NotFoundException(Character.class.getName(), id);
+                }
             }
+            c = optC.get();
         } catch (Exception ex) {
             throw new InternalServerError(ex);
         }

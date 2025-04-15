@@ -1,7 +1,7 @@
 package com.jcruz.reslerianadb.app.v1;
 
 import com.jcruz.reslerianadb.domain.model.CharacterResistResponse;
-import com.jcruz.reslerianadb.domain.service.CharacterResistServiceImpl;
+import com.jcruz.reslerianadb.domain.service.implementation.CharacterResistServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

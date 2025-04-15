@@ -1,8 +1,9 @@
-package com.jcruz.reslerianadb.domain.service;
+package com.jcruz.reslerianadb.domain.service.implementation;
 
 import com.jcruz.reslerianadb.common.exception.InternalServerError;
 import com.jcruz.reslerianadb.common.exception.NotFoundException;
 import com.jcruz.reslerianadb.domain.model.CharacterStatsResponse;
+import com.jcruz.reslerianadb.domain.service.CharacterStatsService;
 import com.jcruz.reslerianadb.infrastructure.entity.Character;
 import com.jcruz.reslerianadb.infrastructure.entity.CharacterStats;
 import com.jcruz.reslerianadb.infrastructure.repository.CharacterStatsRepository;

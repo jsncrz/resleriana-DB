@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CharacterService {
     List<CharacterResponse> getCharactersByLocale(String locale);
-    CharacterResponse getCharacter(int id);
+    CharacterResponse getCharacter(int id, String locale);
 }

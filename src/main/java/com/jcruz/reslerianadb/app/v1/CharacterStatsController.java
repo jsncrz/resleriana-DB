@@ -1,7 +1,7 @@
 package com.jcruz.reslerianadb.app.v1;
 
 import com.jcruz.reslerianadb.domain.model.CharacterStatsResponse;
-import com.jcruz.reslerianadb.domain.service.CharacterStatsServiceImpl;
+import com.jcruz.reslerianadb.domain.service.implementation.CharacterStatsServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
