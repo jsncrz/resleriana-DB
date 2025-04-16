@@ -12,8 +12,8 @@ public class Tag extends BaseEntityWithExtId implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
     @Filter(
-            name="translationByLocale",
-            condition = "LANGUAGE = :locale"
+            name="translationByLanguage",
+            condition = "LANGUAGE = :language"
     )
     private Translation name;
 

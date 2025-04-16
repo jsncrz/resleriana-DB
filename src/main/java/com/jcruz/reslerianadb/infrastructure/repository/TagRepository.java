@@ -19,6 +19,6 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
                 AND n.language = :language
                 ORDER BY t.priority asc
             """)
-    List<ItemTranslationDTO> findTagsByCharacterIdAndLocale(@Param("id") Integer id, @Param("language") String locale);
+    List<ItemTranslationDTO> findTagsByCharacterIdAndLanguage(@Param("id") Integer id, @Param("language") String language);
 
 }
