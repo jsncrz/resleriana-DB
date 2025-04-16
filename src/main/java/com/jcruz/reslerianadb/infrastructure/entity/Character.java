@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "\"CHARACTER\"")
+@Table(name = "`CHARACTER`")
 public class Character extends BaseEntityWithExtId implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -46,6 +47,13 @@ public class Character extends BaseEntityWithExtId implements Serializable {
 
     @Column(nullable = false, name = "ATTACK_ATTRIBUTE")
     private String attackAttribute;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "CHARACTER_TAG",
+            joinColumns = @JoinColumn(name = "CHARACTER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
+    private Set<Tag> characterTags;
 
     public Translation getName() {
         return name;
@@ -125,5 +133,13 @@ public class Character extends BaseEntityWithExtId implements Serializable {
 
     public void setAttackAttribute(String attackAttribute) {
         this.attackAttribute = attackAttribute;
+    }
+
+    public Set<Tag> getCharacterTags() {
+        return characterTags;
+    }
+
+    public void setCharacterTags(Set<Tag> characterTags) {
+        this.characterTags = characterTags;
     }
 }

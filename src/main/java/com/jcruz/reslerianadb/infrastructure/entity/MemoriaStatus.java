@@ -1,14 +1,21 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "CHARACTER_STATS")
-public class CharacterStats extends BaseEntityWithExtId implements Serializable {
+@Table(name = "MEMORIA_STATUS")
+public class MemoriaStatus extends BaseEntity implements Serializable {
+
+    @EmbeddedId
+    private MemoriaKey id;
+
+    @ManyToOne
+    @MapsId("memoriaId")
+    @JoinColumn(name = "MEMORIA_ID", referencedColumnName = "EXT_ID")
+    private Memoria memoria;
 
     @Column(nullable = false, name = "ATTACK")
     private int attack;
@@ -27,6 +34,14 @@ public class CharacterStats extends BaseEntityWithExtId implements Serializable 
 
     @Column(nullable = false, name = "SPEED")
     private int speed;
+
+    public Memoria getMemoria() {
+        return memoria;
+    }
+
+    public void setMemoria(Memoria memoria) {
+        this.memoria = memoria;
+    }
 
     public int getAttack() {
         return attack;
@@ -74,5 +89,13 @@ public class CharacterStats extends BaseEntityWithExtId implements Serializable 
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public MemoriaKey getId() {
+        return id;
+    }
+
+    public void setId(MemoriaKey id) {
+        this.id = id;
     }
 }

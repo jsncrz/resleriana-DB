@@ -19,21 +19,7 @@ public interface CharacterRepository extends JpaRepository<Character, Integer> {
                 AND an.language = :language
                 ORDER BY c.releaseDate desc
             """)
-    List<Character> findSimpleByLocale(@Param("language") String locale);
-    @Query("""
-            select c from Character c
-                JOIN FETCH c.name n
-                JOIN FETCH c.anotherName an
-                JOIN FETCH c.fullName fn
-                JOIN FETCH c.acquisitionText at
-                JOIN FETCH c.description d
-                WHERE n.language = :language
-                AND an.language = :language
-                AND fn.language = :language
-                AND at.language = :language
-                AND d.language = :language
-            """)
-    List<Character> findDetailedByLocale(@Param("language") String locale);
+    List<Character> findSimpleByLanguage(@Param("language") String language);
 
     @Query("""
             select c from Character c
@@ -49,6 +35,6 @@ public interface CharacterRepository extends JpaRepository<Character, Integer> {
                 AND at.language = :language
                 AND d.language = :language
             """)
-    Optional<Character> findByExtIdAndLocale(@Param("extId") Integer extId, @Param("language") String locale);
+    Optional<Character> findByExtIdAndLanguage(@Param("extId") Integer extId, @Param("language") String language);
 
 }

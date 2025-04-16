@@ -1,7 +1,8 @@
 package com.jcruz.reslerianadb.app.v1;
 
 import com.jcruz.reslerianadb.domain.model.CharacterResponse;
-import com.jcruz.reslerianadb.domain.service.CharacterServiceImpl;
+import com.jcruz.reslerianadb.domain.service.CharacterService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +11,19 @@ import java.util.List;
 @RequestMapping("/api/v1/characters")
 public class CharacterController {
 
-    private final CharacterServiceImpl characterService;
+    private final CharacterService characterService;
 
-    public CharacterController(CharacterServiceImpl characterService) {
+    public CharacterController(CharacterService characterService) {
         this.characterService = characterService;
     }
 
     @GetMapping
-    public List<CharacterResponse> getCharacters(@RequestParam(defaultValue = "en") String locale) {
-        return this.characterService.getCharactersByLocale(locale);
+    public List<CharacterResponse> getCharacters(@RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) String language) {
+        return this.characterService.getCharactersByLanguage(language);
     }
 
     @GetMapping(value="/{id}")
-    public CharacterResponse getCharacter(@PathVariable("id") int id) {
-        return this.characterService.getCharacter(id);
+    public CharacterResponse getCharacter(@RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) String language, @PathVariable("id") int id) {
+        return this.characterService.getCharacter(id, language);
     }
 }

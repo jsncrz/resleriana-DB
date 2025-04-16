@@ -1,7 +1,7 @@
 package com.jcruz.reslerianadb.app.v1;
 
 import com.jcruz.reslerianadb.domain.model.CharacterResistResponse;
-import com.jcruz.reslerianadb.domain.service.CharacterResistServiceImpl;
+import com.jcruz.reslerianadb.domain.service.CharacterResistService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/characters/{id}/resist")
 public class CharacterResistController {
 
-    private final CharacterResistServiceImpl characterResistService;
+    private final CharacterResistService characterResistService;
 
-    public CharacterResistController(CharacterResistServiceImpl characterResistService) {
+    public CharacterResistController(CharacterResistService characterResistService) {
         this.characterResistService = characterResistService;
     }
 
