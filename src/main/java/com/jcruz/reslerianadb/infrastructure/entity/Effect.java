@@ -11,14 +11,6 @@ import java.util.Set;
 public class Effect extends BaseEntityWithExtId implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
-    @Filter(
-            name="translationByLanguage",
-            condition = "LANGUAGE = :language"
-    )
-    private Translation name;
-
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
     @Filter(
             name="translationByLanguage",
@@ -28,14 +20,6 @@ public class Effect extends BaseEntityWithExtId implements Serializable {
 
     @OneToMany (mappedBy = "effect")
     private Set<AbilityEffect> abilityEffects;
-
-    public Translation getName() {
-        return name;
-    }
-
-    public void setName(Translation name) {
-        this.name = name;
-    }
 
     public Translation getDescription() {
         return description;

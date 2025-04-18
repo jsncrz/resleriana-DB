@@ -1,16 +1,19 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "MEMORIA_GROWTH")
-public class MemoriaGrowth extends BaseEntityWithExtId implements Serializable {
+@IdClass(MemoriaGrowthId.class)
+public class MemoriaGrowth extends BaseEntity implements Serializable {
+
+    // can't extend from BaseEntityWithID due to IdClass
+    @Id
+    @Column(nullable = false, name = "EXT_ID")
+    private int extId;
 
     @Id
     @Column(nullable = false, name = "LEVEL")
@@ -35,15 +38,23 @@ public class MemoriaGrowth extends BaseEntityWithExtId implements Serializable {
         this.statValue = statValue;
     }
 
+
+    public int getExtId() {
+        return extId;
+    }
+
+    public void setExtId(int extId) {
+        this.extId = extId;
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         MemoriaGrowth that = (MemoriaGrowth) o;
-        return level == that.level && getExtId() == that.getExtId();
+        return level == that.level && extId == that.extId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(level, getExtId());
+        return Objects.hash(level, extId);
     }
 }

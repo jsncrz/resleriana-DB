@@ -3,16 +3,16 @@ package com.jcruz.reslerianadb.infrastructure.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "MEMORIA_STATUS")
 public class MemoriaStatus extends BaseEntity implements Serializable {
 
-    @EmbeddedId
-    private MemoriaKey id;
+    @Id
+    @Column(name = "MEMORIA_ID")
+    private Integer id;
 
-    @ManyToOne
+    @OneToOne
     @MapsId("memoriaId")
     @JoinColumn(name = "MEMORIA_ID", referencedColumnName = "EXT_ID")
     private Memoria memoria;
@@ -91,11 +91,11 @@ public class MemoriaStatus extends BaseEntity implements Serializable {
         this.speed = speed;
     }
 
-    public MemoriaKey getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(MemoriaKey id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
