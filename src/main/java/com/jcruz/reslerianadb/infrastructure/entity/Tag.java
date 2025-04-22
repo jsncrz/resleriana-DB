@@ -1,7 +1,6 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Filter;
 
 import java.io.Serializable;
 
@@ -11,10 +10,6 @@ public class Tag extends BaseEntityWithExtId implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
-    @Filter(
-            name="translationByLanguage",
-            condition = "LANGUAGE = :language"
-    )
     private Translation name;
 
     @Column(nullable = false, name = "PRIORITY")

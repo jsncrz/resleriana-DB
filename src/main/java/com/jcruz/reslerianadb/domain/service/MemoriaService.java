@@ -51,9 +51,11 @@ public class MemoriaService {
     public MemoriaResponse getMemoria(int id, String language) {
         Memoria memoria;
         try {
-            Optional<Memoria> optionalMemoria = this.memoriaRepository.findByExtIdAndLanguage(id, language);
+            Specification<Memoria> spec = where(MemoriaSpec.idIs(id));
+            spec = spec.and(MemoriaSpec.languageIs(language));
+            Optional<Memoria> optionalMemoria = this.memoriaRepository.findOne(spec);
             if (optionalMemoria.isEmpty()) {
-                optionalMemoria = this.memoriaRepository.findByExtIdAndLanguage(id, "jp");
+                optionalMemoria = this.memoriaRepository.findOne(spec);
                 if (optionalMemoria.isEmpty()) {
                     throw new NotFoundException(Memoria.class.getName(), id);
                 }

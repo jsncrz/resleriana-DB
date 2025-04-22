@@ -2,6 +2,7 @@ package com.jcruz.reslerianadb.infrastructure.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Filter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,12 +12,20 @@ import java.util.Set;
 @Table(name = "MEMORIA")
 public class Memoria extends BaseEntityWithExtId implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
+    @Filter(
+            name="translationByLanguage",
+            condition = "LANGUAGE = :language"
+    )
     private Translation name;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
+    @Filter(
+            name="translationByLanguage",
+            condition = "LANGUAGE = :language"
+    )
     private Translation description;
 
     @Temporal(TemporalType.TIMESTAMP)

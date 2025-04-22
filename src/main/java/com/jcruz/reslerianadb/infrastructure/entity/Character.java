@@ -11,11 +11,11 @@ import java.util.Set;
 @Table(name = "`CHARACTER`")
 public class Character extends BaseEntityWithExtId implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
     private Translation name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "ANOTHER_NAME", referencedColumnName = "TL_ID")
     private Translation anotherName;
 
