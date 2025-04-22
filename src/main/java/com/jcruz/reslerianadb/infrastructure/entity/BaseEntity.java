@@ -3,56 +3,54 @@ package com.jcruz.reslerianadb.infrastructure.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @MappedSuperclass
 public class BaseEntity {
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(nullable = false, name = "CREATE_DATE")
-    private Date createDate;
+    @Column(nullable = false, name = "create_date")
+    private LocalDateTime createDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "UPDATE_DATE")
-    private Date updateDate;
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "DELETE_DATE")
-    private Date deleteDate;
+    @Column(name = "delete_date")
+    private LocalDateTime deleteDate;
 
     @PrePersist
     public void onPrePersist() {
-        setCreateDate(new Date());
+        setCreateDate(LocalDateTime.now());
     }
     @PreUpdate
     public void onPreUpdate() {
-        setUpdateDate(new Date());
+        setUpdateDate(LocalDateTime.now());
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 
-    public Date getDeleteDate() {
+    public LocalDateTime getDeleteDate() {
         return deleteDate;
     }
 
-    public void setDeleteDate(Date deleteDate) {
+    public void setDeleteDate(LocalDateTime deleteDate) {
         this.deleteDate = deleteDate;
     }
 }

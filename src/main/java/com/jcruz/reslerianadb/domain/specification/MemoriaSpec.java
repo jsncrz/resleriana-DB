@@ -2,6 +2,7 @@ package com.jcruz.reslerianadb.domain.specification;
 
 import com.jcruz.reslerianadb.infrastructure.entity.Memoria;
 import com.jcruz.reslerianadb.infrastructure.entity.Translation;
+import com.jcruz.reslerianadb.infrastructure.entity.TranslationKey;
 import jakarta.persistence.criteria.Fetch;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
@@ -20,19 +21,20 @@ public class MemoriaSpec {
                 -> builder.equal(memoriaRoot.get("rarity"), rarity);
     }
 
+    @SuppressWarnings("unchecked")
     public static Specification<Memoria> languageIs(String language) {
         return (memoriaRoot, query, builder) -> {
             if (query != null && Long.class != query.getResultType()) {
-                // Need to cast Fetch to Join to use it in conditions
-                @SuppressWarnings("unchecked") Join<Object, Object> name
-                        = (Join<Object, Object>) memoriaRoot.fetch("name", JoinType.LEFT);
-                @SuppressWarnings("unchecked") Join<Object, Object> description
-                        = (Join<Object, Object>) memoriaRoot.fetch("description", JoinType.LEFT);
-                Predicate nameBuilder = builder.equal(name.get("language"), language);
-                Predicate descriptionBuilder = builder.equal(description.get("language"), language);
-                return builder.and(nameBuilder, descriptionBuilder);
+                Join<Object, Object> name = (Join<Object, Object>)memoriaRoot.fetch("name", JoinType.INNER);
+                Join<Object, Object> nameTlJoin = (Join<Object, Object>)name.fetch("translations", JoinType.LEFT);
+                nameTlJoin.on(builder.equal(nameTlJoin.get("language"), language));
+                Join<Object, Object> description  = (Join<Object, Object>)memoriaRoot.fetch("description", JoinType.INNER);
+                Join<Object, Object> descriptionTlJoin = (Join<Object, Object>)description.fetch("translations", JoinType.LEFT);
+                descriptionTlJoin.on(builder.equal(descriptionTlJoin.get("language"), language));
+                query.distinct(true);
+
             }
-            return null;
+            return builder.conjunction();
         };
     }
 

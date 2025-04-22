@@ -4,94 +4,97 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "`CHARACTER`")
-public class Character extends BaseEntityWithExtId implements Serializable {
+@Table(name = "character")
+public class Character extends BaseEntityWithId implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
-    private Translation name;
+    @JoinColumn(name = "character_name", referencedColumnName = "id")
+    private TranslationKey name;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ANOTHER_NAME", referencedColumnName = "TL_ID")
-    private Translation anotherName;
+    @JoinColumn(name = "another_name", referencedColumnName = "id")
+    private TranslationKey anotherName;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "FULL_NAME", referencedColumnName = "TL_ID")
-    private Translation fullName;
+    @JoinColumn(name = "full_name", referencedColumnName = "id")
+    private TranslationKey fullName;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACQUISITION_TEXT", referencedColumnName = "TL_ID")
-    private Translation acquisitionText;
+    @JoinColumn(name = "acquisition_text", referencedColumnName = "id")
+    private TranslationKey acquisitionText;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
-    private Translation description;
+    @JoinColumn(name = "character_description", referencedColumnName = "id")
+    private TranslationKey description;
 
-    @Column(nullable = false, name = "IS_ALCHEMIST")
+    @Column(nullable = false, name = "is_alchemist")
     private boolean alchemist;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "RELEASE_DATE")
-    private Date releaseDate;
+    @Column(name = "release_date")
+    private LocalDateTime releaseDate;
 
-    @Column(nullable = false, name = "INITIAL_RARITY")
+    @Column(nullable = false, name = "initial_rarity")
     private int initialRarity;
 
-    @Column(nullable = false, name = "ROLE")
+    @Column(nullable = false, name = "max_rarity")
+    private int maxRarity;
+
+    @Column(nullable = false, name = "character_role")
     private String role;
 
-    @Column(nullable = false, name = "ATTACK_ATTRIBUTE")
+    @Column(nullable = false, name = "attack_attribute")
     private String attackAttribute;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "CHARACTER_TAG",
-            joinColumns = @JoinColumn(name = "CHARACTER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
+            name = "character_tag",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> characterTags;
 
-    public Translation getName() {
+    public TranslationKey getName() {
         return name;
     }
 
-    public void setName(Translation name) {
+    public void setName(TranslationKey name) {
         this.name = name;
     }
 
-    public Translation getAnotherName() {
+    public TranslationKey getAnotherName() {
         return anotherName;
     }
 
-    public void setAnotherName(Translation anotherName) {
+    public void setAnotherName(TranslationKey anotherName) {
         this.anotherName = anotherName;
     }
 
-    public Translation getFullName() {
+    public TranslationKey getFullName() {
         return fullName;
     }
 
-    public void setFullName(Translation fullName) {
+    public void setFullName(TranslationKey fullName) {
         this.fullName = fullName;
     }
 
-    public Translation getAcquisitionText() {
+    public TranslationKey getAcquisitionText() {
         return acquisitionText;
     }
 
-    public void setAcquisitionText(Translation acquisitionText) {
+    public void setAcquisitionText(TranslationKey acquisitionText) {
         this.acquisitionText = acquisitionText;
     }
 
-    public Translation getDescription() {
+    public TranslationKey getDescription() {
         return description;
     }
 
-    public void setDescription(Translation description) {
+    public void setDescription(TranslationKey description) {
         this.description = description;
     }
 
@@ -103,11 +106,11 @@ public class Character extends BaseEntityWithExtId implements Serializable {
         this.alchemist = alchemist;
     }
 
-    public Date getReleaseDate() {
+    public LocalDateTime getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDateTime releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -117,6 +120,14 @@ public class Character extends BaseEntityWithExtId implements Serializable {
 
     public void setInitialRarity(int initialRarity) {
         this.initialRarity = initialRarity;
+    }
+
+    public int getMaxRarity() {
+        return maxRarity;
+    }
+
+    public void setMaxRarity(int maxRarity) {
+        this.maxRarity = maxRarity;
     }
 
     public String getRole() {

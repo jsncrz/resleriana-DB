@@ -1,48 +1,38 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Filter;
 
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "ABILITY")
-public class Ability extends BaseEntityWithExtId implements Serializable {
+@Table(name = "ability")
+public class Ability extends BaseEntityWithId implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
-    @Filter(
-            name="translationByLanguage",
-            condition = "LANGUAGE = :language"
-    )
-    private Translation name;
+    @ManyToOne
+    @JoinColumn(name = "ability_name", referencedColumnName = "id", insertable = false, updatable = false)
+    private TranslationKey name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
-    @Filter(
-            name="translationByLanguage",
-            condition = "LANGUAGE = :language"
-    )
-    private Translation description;
+    @ManyToOne
+    @JoinColumn(name = "ability_description", referencedColumnName = "id", insertable = false, updatable = false)
+    private TranslationKey description;
 
-    @OneToMany (mappedBy = "ability")
+    @OneToMany(mappedBy = "ability")
     private Set<AbilityEffect> abilityEffects;
 
-
-    public Translation getName() {
+    public TranslationKey getName() {
         return name;
     }
 
-    public void setName(Translation name) {
+    public void setName(TranslationKey name) {
         this.name = name;
     }
 
-    public Translation getDescription() {
+    public TranslationKey getDescription() {
         return description;
     }
 
-    public void setDescription(Translation description) {
+    public void setDescription(TranslationKey description) {
         this.description = description;
     }
 

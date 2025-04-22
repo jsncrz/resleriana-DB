@@ -6,7 +6,7 @@ import org.hibernate.annotations.Filter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "ABILITY_EFFECT")
+@Table(name = "ability_effect")
 public class AbilityEffect extends BaseEntity implements Serializable {
 
     @EmbeddedId
@@ -14,15 +14,15 @@ public class AbilityEffect extends BaseEntity implements Serializable {
 
     @ManyToOne
     @MapsId("abilityId")
-    @JoinColumn(name = "ABILITY_ID", referencedColumnName = "EXT_ID")
+    @JoinColumn(name = "ability_id", referencedColumnName = "id")
     private Ability ability;
 
     @ManyToOne
     @MapsId("effectId")
-    @JoinColumn(name = "EFFECT_ID", referencedColumnName = "EXT_ID")
+    @JoinColumn(name = "effect_id", referencedColumnName = "id")
     private Effect effect;
 
-    @Column(nullable = false, name = "VALUE")
+    @Column(nullable = false, name = "number_value")
     private int value;
 
     public AbilityEffectKey getId() {

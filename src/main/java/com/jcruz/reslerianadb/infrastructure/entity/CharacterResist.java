@@ -8,27 +8,27 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "CHARACTER_RESIST")
-public class CharacterResist extends BaseEntityWithExtId implements Serializable {
+public class CharacterResist extends BaseEntityWithId implements Serializable {
 
-    @Column(nullable = false, name = "FIRE")
+    @Column(nullable = false, name = "fire")
     private int fire;
 
-    @Column(nullable = false, name = "ICE")
+    @Column(nullable = false, name = "ice")
     private int ice;
 
-    @Column(nullable = false, name = "AIR")
+    @Column(nullable = false, name = "air")
     private int air;
 
-    @Column(nullable = false, name = "BOLT")
+    @Column(nullable = false, name = "bolt")
     private int bolt;
 
-    @Column(nullable = false, name = "STRIKE")
+    @Column(nullable = false, name = "strike")
     private int strike;
 
-    @Column(nullable = false, name = "STAB")
+    @Column(nullable = false, name = "stab")
     private int stab;
 
-    @Column(nullable = false, name = "SLASH")
+    @Column(nullable = false, name = "slash")
     private int slash;
 
     public int getFire() {

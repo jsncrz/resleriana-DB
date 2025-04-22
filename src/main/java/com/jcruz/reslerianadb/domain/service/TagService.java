@@ -21,21 +21,21 @@ public class TagService {
     }
 
     public List<TagResponse> getTagsByCharacterIdAndLanguage(Integer id, String language) {
-        List<ItemTranslationDTO> tags;
-        try {
-            tags = this.tagRepository.findTagsByCharacterIdAndLanguage(id, language);
-        } catch (Exception ex) {
-            throw new InternalServerError(ex);
-        }
-
-        List<TagResponse> res = new ArrayList<>();
-        for (ItemTranslationDTO t : tags) {
-            res.add(new TagResponse.Builder()
-                    .id(t.id())
-                    .name(t.text())
-                    .build());
-        }
-        return res;
+//        List<ItemTranslationDTO> tags;
+//        try {
+//            tags = this.tagRepository.findTagsByCharacterIdAndLanguage(id, language);
+//        } catch (Exception ex) {
+//            throw new InternalServerError(ex);
+//        }
+//
+//        List<TagResponse> res = new ArrayList<>();
+//        for (ItemTranslationDTO t : tags) {
+//            res.add(new TagResponse.Builder()
+//                    .id(t.id())
+//                    .name(t.text())
+//                    .build());
+//        }
+        return new ArrayList<>();
     }
 
 }

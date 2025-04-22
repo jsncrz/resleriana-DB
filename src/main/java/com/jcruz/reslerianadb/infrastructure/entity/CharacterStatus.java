@@ -7,25 +7,25 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "CHARACTER_STATS")
-public class CharacterStats extends BaseEntityWithExtId implements Serializable {
+@Table(name = "character_status")
+public class CharacterStatus extends BaseEntityWithId implements Serializable {
 
-    @Column(nullable = false, name = "ATTACK")
+    @Column(nullable = false, name = "attack")
     private int attack;
 
-    @Column(nullable = false, name = "DEFENSE")
+    @Column(nullable = false, name = "defense")
     private int defense;
 
-    @Column(nullable = false, name = "HP")
+    @Column(nullable = false, name = "hp")
     private int hp;
 
-    @Column(nullable = false, name = "MAGIC")
+    @Column(nullable = false, name = "magic")
     private int magic;
 
-    @Column(nullable = false, name = "MENTAL")
+    @Column(nullable = false, name = "mental")
     private int mental;
 
-    @Column(nullable = false, name = "SPEED")
+    @Column(nullable = false, name = "speed")
     private int speed;
 
     public int getAttack() {

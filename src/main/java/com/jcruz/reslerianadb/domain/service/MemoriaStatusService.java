@@ -6,12 +6,14 @@ import com.jcruz.reslerianadb.domain.model.MemoriaGrowthDTO;
 import com.jcruz.reslerianadb.domain.model.MemoriaStatusResponse;
 import com.jcruz.reslerianadb.infrastructure.entity.Character;
 import com.jcruz.reslerianadb.infrastructure.entity.MemoriaGrowth;
+import com.jcruz.reslerianadb.infrastructure.entity.MemoriaGrowthKey;
 import com.jcruz.reslerianadb.infrastructure.entity.MemoriaStatus;
 import com.jcruz.reslerianadb.infrastructure.repository.MemoriaGrowthRepository;
 import com.jcruz.reslerianadb.infrastructure.repository.MemoriaStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,13 +24,9 @@ public class MemoriaStatusService {
     @Autowired
     private final MemoriaStatusRepository memoriaStatusRepository;
 
-    @Autowired
-    private final MemoriaGrowthRepository memoriaGrowthRepository;
-
     public MemoriaStatusService(MemoriaStatusRepository memoriaStatusRepository,
                                 MemoriaGrowthRepository memoriaGrowthRepository) {
         this.memoriaStatusRepository = memoriaStatusRepository;
-        this.memoriaGrowthRepository = memoriaGrowthRepository;
     }
 
     private MemoriaGrowthDTO convertToMemoriaGrowthDto(final MemoriaGrowth growth) {
@@ -38,8 +36,8 @@ public class MemoriaStatusService {
                 .build();
     }
 
-    private List<MemoriaGrowthDTO> getMemoriaGrowthsAsDtos(int id) {
-        return memoriaGrowthRepository.findByExtId(id).stream()
+    private List<MemoriaGrowthDTO> getMemoriaGrowthsAsDtos(MemoriaGrowthKey growthKey) {
+        return growthKey.getGrowths().stream().sorted(Comparator.comparingInt(MemoriaGrowth::getLevel))
                 .map(this::convertToMemoriaGrowthDto).collect(Collectors.toList());
     }
 

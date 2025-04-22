@@ -10,17 +10,20 @@ import java.util.Objects;
 @IdClass(MemoriaGrowthId.class)
 public class MemoriaGrowth extends BaseEntity implements Serializable {
 
-    // can't extend from BaseEntityWithID due to IdClass
     @Id
-    @Column(nullable = false, name = "EXT_ID")
+    @Column(nullable = false, name = "id")
     private int extId;
 
     @Id
-    @Column(nullable = false, name = "LEVEL")
+    @Column(nullable = false, name = "memoria_level")
     private int level;
 
-    @Column(nullable = false, name = "STAT_VALUE")
+    @Column(nullable = false, name = "stat_value")
     private int statValue;
+
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey memoriaGrowthKey;
 
     public int getLevel() {
         return level;
@@ -38,7 +41,6 @@ public class MemoriaGrowth extends BaseEntity implements Serializable {
         this.statValue = statValue;
     }
 
-
     public int getExtId() {
         return extId;
     }
@@ -46,6 +48,15 @@ public class MemoriaGrowth extends BaseEntity implements Serializable {
     public void setExtId(int extId) {
         this.extId = extId;
     }
+
+    public MemoriaGrowthKey getMemoriaGrowthKey() {
+        return memoriaGrowthKey;
+    }
+
+    public void setMemoriaGrowthKey(MemoriaGrowthKey memoriaGrowthKey) {
+        this.memoriaGrowthKey = memoriaGrowthKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
