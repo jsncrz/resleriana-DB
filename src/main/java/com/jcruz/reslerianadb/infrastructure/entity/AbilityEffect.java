@@ -12,12 +12,12 @@ public class AbilityEffect extends BaseEntity implements Serializable {
     @EmbeddedId
     private AbilityEffectKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("abilityId")
     @JoinColumn(name = "ability_id", referencedColumnName = "id")
     private Ability ability;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("effectId")
     @JoinColumn(name = "effect_id", referencedColumnName = "id")
     private Effect effect;
@@ -31,6 +31,10 @@ public class AbilityEffect extends BaseEntity implements Serializable {
 
     public void setId(AbilityEffectKey id) {
         this.id = id;
+    }
+
+    public int getEffectId() {
+        return getId().getEffectID();
     }
 
     public Ability getAbility() {

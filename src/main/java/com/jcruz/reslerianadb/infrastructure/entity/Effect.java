@@ -9,11 +9,11 @@ import java.util.Set;
 @Table(name = "effect")
 public class Effect extends BaseEntityWithId implements Serializable {
 
-    @Column(name = "description")
+    @Column(name = "effect_description")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "description", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "effect_description", referencedColumnName = "id", insertable = false, updatable = false)
     private TranslationKey descriptionKey;
 
     @OneToMany (mappedBy = "effect")

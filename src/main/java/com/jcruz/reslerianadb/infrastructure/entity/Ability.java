@@ -17,7 +17,7 @@ public class Ability extends BaseEntityWithId implements Serializable {
     @JoinColumn(name = "ability_description", referencedColumnName = "id", insertable = false, updatable = false)
     private TranslationKey description;
 
-    @OneToMany(mappedBy = "ability")
+    @OneToMany(mappedBy = "ability", fetch = FetchType.LAZY)
     private Set<AbilityEffect> abilityEffects;
 
     public TranslationKey getName() {
