@@ -1,33 +1,24 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name = "\"TRANSLATION\"")
-public class Translation extends BaseEntity implements Serializable {
+@Table(name = "translations")
+@IdClass(TranslationId.class)
+public class Translation extends BaseEntityWithStringId implements Serializable {
 
     @Id
-    @Column(nullable = false, name = "TL_ID")
-    private String tlId;
-
-    @Column(nullable = false, name = "LANGUAGE")
+    @Column(nullable = false, name = "lang_code")
     private String language;
 
-    @Column(nullable = false, name = "TEXT")
+    @Column(nullable = false, name = "translated_text")
     private String text;
 
-    public String getTlId() {
-        return tlId;
-    }
-
-    public void setTlId(String tlId) {
-        this.tlId = tlId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    private TranslationKey translationKey;
 
     public String getLanguage() {
         return language;
@@ -43,5 +34,13 @@ public class Translation extends BaseEntity implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public TranslationKey getTranslationKey() {
+        return translationKey;
+    }
+
+    public void setTranslationKey(TranslationKey translationKey) {
+        this.translationKey = translationKey;
     }
 }

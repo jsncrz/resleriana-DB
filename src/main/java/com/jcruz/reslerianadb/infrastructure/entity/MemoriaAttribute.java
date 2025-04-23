@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "MEMORIA_ATTRIBUTE")
+@Table(name = "memoria_attribute")
 public class MemoriaAttribute extends BaseEntity implements Serializable {
 
     @EmbeddedId
@@ -13,10 +13,10 @@ public class MemoriaAttribute extends BaseEntity implements Serializable {
 
     @ManyToOne
     @MapsId("memoriaId")
-    @JoinColumn(name = "MEMORIA_ID", referencedColumnName = "EXT_ID")
+    @JoinColumn(name = "memoria_id", referencedColumnName = "id")
     private Memoria memoria;
 
-    @Column(nullable = false, name = "ATTRIBUTE")
+    @Column(nullable = false, name = "memoria_attribute")
     private String attribute;
 
     public Memoria getMemoria() {

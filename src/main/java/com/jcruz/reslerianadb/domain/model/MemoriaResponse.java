@@ -2,17 +2,21 @@ package com.jcruz.reslerianadb.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public record MemoriaResponse(
         @JsonProperty("id") Integer id,
         @JsonProperty("name") String name,
         @JsonProperty("description") String description,
-        @JsonProperty("rarity") int rarity) {
+        @JsonProperty("rarity") int rarity,
+        @JsonProperty("abilities") List<AbilityResponse> abilityResponse) {
 
     public static final class Builder {
         Integer id;
         String name;
         String description;
         int rarity;
+        List<AbilityResponse> abilityResponse;
 
         public Builder id(Integer id) {
             this.id = id;
@@ -34,12 +38,18 @@ public record MemoriaResponse(
             return this;
         }
 
+        public Builder abilityResponse(List<AbilityResponse> abilityResponse) {
+            this.abilityResponse = abilityResponse;
+            return this;
+        }
+
         public MemoriaResponse build() {
             return new MemoriaResponse(
                     id,
                     name,
                     description,
-                    rarity);
+                    rarity,
+                    abilityResponse);
         }
     }
 }

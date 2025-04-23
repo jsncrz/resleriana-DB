@@ -2,67 +2,68 @@ package com.jcruz.reslerianadb.infrastructure.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Filter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "MEMORIA")
-public class Memoria extends BaseEntityWithExtId implements Serializable {
+@Table(name = "memoria")
+public class Memoria extends BaseEntityWithId implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "NAME", referencedColumnName = "TL_ID")
-    private Translation name;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "memoria_name", referencedColumnName = "id")
+    private TranslationKey name;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "DESCRIPTION", referencedColumnName = "TL_ID")
-    private Translation description;
+    @JoinColumn(name = "memoria_description", referencedColumnName = "id")
+    private TranslationKey description;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "RELEASE_DATE")
-    private Date releaseDate;
+    @Column(name = "release_date")
+    private LocalDateTime releaseDate;
 
-    @Column(nullable = false, name = "RARITY")
+    @Column(nullable = false, name = "rarity")
     private int rarity;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "MEMORIA_ABILITY",
-            joinColumns = @JoinColumn(name = "MEMORIA_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ABILITY_ID"))
+            name = "memoria_ability",
+            joinColumns = @JoinColumn(name = "memoria_id"),
+            inverseJoinColumns = @JoinColumn(name = "ability_id"))
     private Set<Ability> memoriaAbility;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="MEMORIA_ID", referencedColumnName="EXT_ID")
+    @JoinColumn(name="memoria_id", referencedColumnName="id")
     private Set<MemoriaRole> roles;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="MEMORIA_ID", referencedColumnName="EXT_ID")
+    @JoinColumn(name="memoria_id", referencedColumnName="id")
     private Set<MemoriaAttribute> attributes;
 
-    public Translation getName() {
+    public TranslationKey getName() {
         return name;
     }
 
-    public void setName(Translation name) {
+    public void setName(TranslationKey name) {
         this.name = name;
     }
 
-    public Translation getDescription() {
+    public TranslationKey getDescription() {
         return description;
     }
 
-    public void setDescription(Translation description) {
+    public void setDescription(TranslationKey description) {
         this.description = description;
     }
 
-    public Date getReleaseDate() {
+    public LocalDateTime getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDateTime releaseDate) {
         this.releaseDate = releaseDate;
     }
 

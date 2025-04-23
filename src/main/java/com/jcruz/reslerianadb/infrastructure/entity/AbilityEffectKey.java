@@ -9,10 +9,10 @@ import java.util.Objects;
 @Embeddable
 public class AbilityEffectKey implements Serializable {
 
-    @Column(name = "ABILITY_ID")
+    @Column(name = "ability_id")
     private int abilityId;
 
-    @Column(name = "EFFECT_ID")
+    @Column(name = "effect_id")
     private int effectID;
 
     public int getAbilityId() {

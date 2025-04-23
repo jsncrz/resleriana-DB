@@ -4,7 +4,7 @@ import com.jcruz.reslerianadb.common.exception.InternalServerError;
 import com.jcruz.reslerianadb.common.exception.NotFoundException;
 import com.jcruz.reslerianadb.domain.model.CharacterStatsResponse;
 import com.jcruz.reslerianadb.infrastructure.entity.Character;
-import com.jcruz.reslerianadb.infrastructure.entity.CharacterStats;
+import com.jcruz.reslerianadb.infrastructure.entity.CharacterStatus;
 import com.jcruz.reslerianadb.infrastructure.repository.CharacterStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,9 @@ public class CharacterStatsService {
     }
 
     public CharacterStatsResponse getCharacterStat(int id) {
-        CharacterStats c;
+        CharacterStatus c;
         try {
-            Optional<CharacterStats> optC = this.characterStatRepository.findById(id);
+            Optional<CharacterStatus> optC = this.characterStatRepository.findById(id);
             if (optC.isEmpty()) {
                 throw new NotFoundException(Character.class.getName(), id);
             } else {

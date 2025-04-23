@@ -3,37 +3,43 @@ package com.jcruz.reslerianadb.infrastructure.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "MEMORIA_STATUS")
 public class MemoriaStatus extends BaseEntity implements Serializable {
 
-    @EmbeddedId
-    private MemoriaKey id;
+    @Id
+    @Column(name = "memoria_id")
+    private Integer id;
 
-    @ManyToOne
-    @MapsId("memoriaId")
-    @JoinColumn(name = "MEMORIA_ID", referencedColumnName = "EXT_ID")
+    @OneToOne
+    @MapsId("id")
+    @JoinColumn(name = "memoria_id", referencedColumnName = "id")
     private Memoria memoria;
 
-    @Column(nullable = false, name = "ATTACK")
-    private int attack;
+    @ManyToOne
+    @JoinColumn(name = "attack", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey attack;
 
-    @Column(nullable = false, name = "DEFENSE")
-    private int defense;
+    @ManyToOne
+    @JoinColumn(name = "defense", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey defense;
 
-    @Column(nullable = false, name = "HP")
-    private int hp;
+    @ManyToOne
+    @JoinColumn(name = "hp", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey hp;
 
-    @Column(nullable = false, name = "MAGIC")
-    private int magic;
+    @ManyToOne
+    @JoinColumn(name = "magic", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey magic;
 
-    @Column(nullable = false, name = "MENTAL")
-    private int mental;
+    @ManyToOne
+    @JoinColumn(name = "mental", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey mental;
 
-    @Column(nullable = false, name = "SPEED")
-    private int speed;
+    @ManyToOne
+    @JoinColumn(name = "speed", referencedColumnName = "id", insertable = false, updatable = false)
+    private MemoriaGrowthKey speed;
 
     public Memoria getMemoria() {
         return memoria;
@@ -43,59 +49,59 @@ public class MemoriaStatus extends BaseEntity implements Serializable {
         this.memoria = memoria;
     }
 
-    public int getAttack() {
+    public MemoriaGrowthKey getAttack() {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public void setAttack(MemoriaGrowthKey attack) {
         this.attack = attack;
     }
 
-    public int getDefense() {
+    public MemoriaGrowthKey getDefense() {
         return defense;
     }
 
-    public void setDefense(int defense) {
+    public void setDefense(MemoriaGrowthKey defense) {
         this.defense = defense;
     }
 
-    public int getHp() {
+    public MemoriaGrowthKey getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(MemoriaGrowthKey hp) {
         this.hp = hp;
     }
 
-    public int getMagic() {
+    public MemoriaGrowthKey getMagic() {
         return magic;
     }
 
-    public void setMagic(int magic) {
+    public void setMagic(MemoriaGrowthKey magic) {
         this.magic = magic;
     }
 
-    public int getMental() {
+    public MemoriaGrowthKey getMental() {
         return mental;
     }
 
-    public void setMental(int mental) {
+    public void setMental(MemoriaGrowthKey mental) {
         this.mental = mental;
     }
 
-    public int getSpeed() {
+    public MemoriaGrowthKey getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(MemoriaGrowthKey speed) {
         this.speed = speed;
     }
 
-    public MemoriaKey getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(MemoriaKey id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

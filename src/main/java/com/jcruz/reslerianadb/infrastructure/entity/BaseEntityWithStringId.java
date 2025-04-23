@@ -5,17 +5,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class BaseEntityWithExtId extends BaseEntity {
+public class BaseEntityWithStringId extends BaseEntity {
 
     @Id
-    @Column(nullable = false, name = "EXT_ID")
-    private int extId;
+    @Column(nullable = false, name = "id")
+    private String extId;
 
-    public int getExtId() {
+    public String getExtId() {
         return extId;
     }
 
-    public void setExtId(int extId) {
+    public void setExtId(String extId) {
         this.extId = extId;
     }
 }

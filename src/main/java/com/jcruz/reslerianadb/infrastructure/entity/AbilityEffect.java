@@ -6,23 +6,23 @@ import org.hibernate.annotations.Filter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "ABILITY_EFFECT")
+@Table(name = "ability_effect")
 public class AbilityEffect extends BaseEntity implements Serializable {
 
     @EmbeddedId
     private AbilityEffectKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("abilityId")
-    @JoinColumn(name = "ABILITY_ID", referencedColumnName = "EXT_ID")
+    @JoinColumn(name = "ability_id", referencedColumnName = "id")
     private Ability ability;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("effectId")
-    @JoinColumn(name = "EFFECT_ID", referencedColumnName = "EXT_ID")
+    @JoinColumn(name = "effect_id", referencedColumnName = "id")
     private Effect effect;
 
-    @Column(nullable = false, name = "VALUE")
+    @Column(nullable = false, name = "number_value")
     private int value;
 
     public AbilityEffectKey getId() {
@@ -31,6 +31,10 @@ public class AbilityEffect extends BaseEntity implements Serializable {
 
     public void setId(AbilityEffectKey id) {
         this.id = id;
+    }
+
+    public int getEffectId() {
+        return getId().getEffectID();
     }
 
     public Ability getAbility() {
