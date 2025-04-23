@@ -92,7 +92,7 @@ public class MemoriaService {
     }
 
     private List<AbilityResponse> getAbilityResponse(String language, Memoria memoria) {
-        return memoria.getMemoriaAbility().stream().sorted(Comparator.comparingInt(Ability::getExtId))
+        return memoria.getMemoriaAbility().stream()
                 .map(ability -> mapAbilityToResponse(language, ability))
                 .toList();
     }
@@ -108,7 +108,6 @@ public class MemoriaService {
 
     private static List<AbilityEffectResponse> getAndMapAbilityEffectToResponse(Ability ability) {
         return ability.getAbilityEffects().stream()
-                .sorted(Comparator.comparingInt(AbilityEffect::getEffectId))
                 .map(abilityEffect -> new AbilityEffectResponse(abilityEffect.getValue())).toList();
     }
 }

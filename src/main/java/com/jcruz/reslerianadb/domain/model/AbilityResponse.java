@@ -7,7 +7,7 @@ import java.util.List;
 public record AbilityResponse(
         @JsonProperty("name") String name,
         @JsonProperty("description") String description,
-        @JsonProperty("abilityEffect") List<AbilityEffectResponse> abilityEffect) {
+        @JsonProperty("abilityEffects") List<AbilityEffectResponse> abilityEffect) {
 
     public static final class Builder {
         String name;
