@@ -1,9 +1,6 @@
 package com.jcruz.reslerianadb.infrastructure.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -15,8 +12,7 @@ public class TranslationKey implements Serializable {
     @Id
     @Column(nullable = false, name = "id")
     private String extId;
-
-    @OneToMany(mappedBy = "translationKey")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "translationKey")
     private Set<Translation> translations;
 
     public Set<Translation> getTranslations() {
