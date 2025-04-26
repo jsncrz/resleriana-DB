@@ -18,7 +18,7 @@ public class CharacterResistController {
     }
 
     @GetMapping
-    public CharacterResistResponse getCharacterResist(@PathVariable("id") int id) {
+    public CharacterResistResponse getCharacterResist(@PathVariable("id") Integer id) {
         return this.characterResistService.getCharacterResist(id);
     }
 }

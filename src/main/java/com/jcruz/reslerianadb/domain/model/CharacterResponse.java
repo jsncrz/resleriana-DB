@@ -12,7 +12,8 @@ public record CharacterResponse(
         @JsonProperty("initialRarity") int initialRarity,
         @JsonProperty("attackAttribute") String attackAttribute,
         @JsonProperty("role") String role,
-        @JsonProperty("alchemist") boolean alchemist) {
+        @JsonProperty("alchemist") boolean alchemist
+        ) {
 
     public static final class Builder {
         Integer id;

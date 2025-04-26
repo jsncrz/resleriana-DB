@@ -2,7 +2,7 @@ package com.jcruz.reslerianadb.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record AbilityEffectResponse(
+public record EffectResponse(
         @JsonProperty("value") int value) {
 
     public static final class Builder {
@@ -13,9 +13,8 @@ public record AbilityEffectResponse(
             return this;
         }
 
-
-        public AbilityEffectResponse build() {
-            return new AbilityEffectResponse(value);
+        public EffectResponse build() {
+            return new EffectResponse(value);
         }
     }
 }

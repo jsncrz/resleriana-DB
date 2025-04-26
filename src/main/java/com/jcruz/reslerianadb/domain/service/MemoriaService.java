@@ -3,12 +3,11 @@ package com.jcruz.reslerianadb.domain.service;
 import com.jcruz.reslerianadb.common.exception.InternalServerError;
 import com.jcruz.reslerianadb.common.exception.NotFoundException;
 import com.jcruz.reslerianadb.common.util.TranslationHelper;
-import com.jcruz.reslerianadb.domain.model.AbilityEffectResponse;
+import com.jcruz.reslerianadb.domain.model.EffectResponse;
 import com.jcruz.reslerianadb.domain.model.AbilityResponse;
 import com.jcruz.reslerianadb.domain.model.MemoriaResponse;
 import com.jcruz.reslerianadb.domain.specification.MemoriaSpec;
 import com.jcruz.reslerianadb.infrastructure.entity.Ability;
-import com.jcruz.reslerianadb.infrastructure.entity.AbilityEffect;
 import com.jcruz.reslerianadb.infrastructure.entity.Memoria;
 import com.jcruz.reslerianadb.infrastructure.repository.MemoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,8 +104,8 @@ public class MemoriaService {
                 .build();
     }
 
-    private static List<AbilityEffectResponse> getAndMapAbilityEffectToResponse(Ability ability) {
+    private static List<EffectResponse> getAndMapAbilityEffectToResponse(Ability ability) {
         return ability.getAbilityEffects().stream()
-                .map(abilityEffect -> new AbilityEffectResponse(abilityEffect.getValue())).toList();
+                .map(abilityEffect -> new EffectResponse(abilityEffect.getValue())).toList();
     }
 }

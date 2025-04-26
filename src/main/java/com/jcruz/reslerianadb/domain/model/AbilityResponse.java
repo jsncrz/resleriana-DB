@@ -7,12 +7,12 @@ import java.util.List;
 public record AbilityResponse(
         @JsonProperty("name") String name,
         @JsonProperty("description") String description,
-        @JsonProperty("abilityEffects") List<AbilityEffectResponse> abilityEffect) {
+        @JsonProperty("abilityEffects") List<EffectResponse> abilityEffect) {
 
     public static final class Builder {
         String name;
         String description;
-        List<AbilityEffectResponse> abilityEffect;
+        List<EffectResponse> abilityEffect;
 
         public Builder description(String description) {
             this.description = description;
@@ -24,7 +24,7 @@ public record AbilityResponse(
             return this;
         }
 
-        public Builder abilityEffect(List<AbilityEffectResponse> abilityEffect) {
+        public Builder abilityEffect(List<EffectResponse> abilityEffect) {
             this.abilityEffect = abilityEffect;
             return this;
         }
