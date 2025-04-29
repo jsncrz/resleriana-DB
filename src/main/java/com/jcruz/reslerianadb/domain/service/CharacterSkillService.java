@@ -70,6 +70,9 @@ public class CharacterSkillService {
                 .effectType(skill.getEffectType())
                 .targetType(skill.getTargetType())
                 .skillEffects(transformSkillEffectToEffectResponse(skill))
+                .linkedSkill(skill.getLinkedSkill() != null ?
+                        translationHelper.getTextForLang(
+                                skill.getLinkedSkill().getName(), language) : null)
                 .build();
     }
 

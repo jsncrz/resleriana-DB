@@ -13,7 +13,8 @@ public record SkillResponse(
         @JsonProperty("skillWait") Integer skillWait,
         @JsonProperty("attribute") String attribute,
         @JsonProperty("effectType") String effectType,
-        @JsonProperty("targetType") String targetType
+        @JsonProperty("targetType") String targetType,
+        @JsonProperty("linkedSkill") String linkedSkill
         ) {
 
     public static final class Builder {
@@ -27,6 +28,7 @@ public record SkillResponse(
         String attribute;
         String effectType;
         String targetType;
+        String linkedSkill;
 
         public Builder name(String name) {
             this.name = name;
@@ -73,6 +75,11 @@ public record SkillResponse(
             return this;
         }
 
+        public Builder linkedSkill(String linkedSkill) {
+            this.linkedSkill = linkedSkill;
+            return this;
+        }
+
         public SkillResponse build() {
             return new SkillResponse(
                     name,
@@ -83,7 +90,8 @@ public record SkillResponse(
                     skillWait,
                     attribute,
                     effectType,
-                    targetType);
+                    targetType,
+                    linkedSkill);
         }
     }
 }

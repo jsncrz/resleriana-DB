@@ -20,6 +20,10 @@ public class Skill extends BaseEntityWithId implements Serializable {
     @OneToMany(mappedBy = "skill", fetch = FetchType.LAZY)
     private Set<SkillEffect> skillEffects;
 
+    @ManyToOne
+    @JoinColumn(name = "linked_skill", referencedColumnName = "id", insertable = false, updatable = false)
+    private Skill linkedSkill;
+
     @Column(name="skill_power")
     private Integer power;
 
@@ -108,5 +112,13 @@ public class Skill extends BaseEntityWithId implements Serializable {
 
     public void setTargetType(String targetType) {
         this.targetType = targetType;
+    }
+
+    public Skill getLinkedSkill() {
+        return linkedSkill;
+    }
+
+    public void setLinkedSkill(Skill linkedSkill) {
+        this.linkedSkill = linkedSkill;
     }
 }
