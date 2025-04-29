@@ -3,6 +3,7 @@ package com.jcruz.reslerianadb.infrastructure.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 public class TranslationId implements Serializable {
@@ -29,5 +30,17 @@ public class TranslationId implements Serializable {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TranslationId that = (TranslationId) o;
+        return Objects.equals(extId, that.extId) && Objects.equals(language, that.language);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(extId, language);
     }
 }

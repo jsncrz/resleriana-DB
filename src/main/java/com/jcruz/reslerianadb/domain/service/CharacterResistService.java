@@ -21,7 +21,7 @@ public class CharacterResistService {
         this.characterResistRepository = characterResistRepository;
     }
 
-    public CharacterResistResponse getCharacterResist(int id) {
+    public CharacterResistResponse getCharacterResist(Integer id) {
         CharacterResist c;
         try {
             Optional<CharacterResist> optC = this.characterResistRepository.findById(id);

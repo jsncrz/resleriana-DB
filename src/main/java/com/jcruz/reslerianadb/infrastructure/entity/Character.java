@@ -57,6 +57,10 @@ public class Character extends BaseEntityWithId implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> characterTags;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="character_id", referencedColumnName="id")
+    private Set<CharacterSkill> skills;
+
     public TranslationKey getName() {
         return name;
     }
@@ -151,5 +155,13 @@ public class Character extends BaseEntityWithId implements Serializable {
 
     public void setCharacterTags(Set<Tag> characterTags) {
         this.characterTags = characterTags;
+    }
+
+    public Set<CharacterSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<CharacterSkill> skills) {
+        this.skills = skills;
     }
 }
