@@ -81,6 +81,7 @@ public class CharacterSkillService {
                 .map(skillEffect ->
                         new EffectResponse.Builder()
                                 .value(skillEffect.getValue())
+                                .effectIndex(skillEffect.getSkillEffectIndex())
                                 .build())
                 .toList();
     }

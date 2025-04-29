@@ -106,6 +106,10 @@ public class MemoriaService {
 
     private static List<EffectResponse> getAndMapAbilityEffectToResponse(Ability ability) {
         return ability.getAbilityEffects().stream()
-                .map(abilityEffect -> new EffectResponse(abilityEffect.getValue())).toList();
+                .map(abilityEffect ->
+                        new EffectResponse.Builder()
+                                .value(abilityEffect.getValue())
+                                .build())
+                .toList();
     }
 }

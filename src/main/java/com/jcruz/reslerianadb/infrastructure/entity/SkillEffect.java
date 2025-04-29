@@ -24,6 +24,9 @@ public class SkillEffect extends BaseEntity implements Serializable {
     @Column(nullable = false, name = "number_value")
     private int value;
 
+    @Column(name = "skill_effect_index")
+    private Integer skillEffectIndex;
+
     public SkillEffectKey getId() {
         return id;
     }
@@ -54,5 +57,13 @@ public class SkillEffect extends BaseEntity implements Serializable {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public Integer getSkillEffectIndex() {
+        return skillEffectIndex;
+    }
+
+    public void setSkillEffectIndex(Integer skillEffectIndex) {
+        this.skillEffectIndex = skillEffectIndex;
     }
 }
