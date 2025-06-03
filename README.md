@@ -1,4 +1,4 @@
-# Atelier Resleriana Data API
+# WIP: Atelier Resleriana Data API
 
 A Spring Boot Java backend API that provides access to Atelier Resleriana game data, including characters and memorias with their relevant information.
 
