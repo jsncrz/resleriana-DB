@@ -1,0 +1,14 @@
+services:
+  resleriana-api:
+    container_name: resleriana-api-prod
+    env_file: ./.env
+    networks:
+      - spring-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://$DB_URL:$DB_PORT/$DB_NAME
+      - JAKARTA_PERSISTENCE_JDBC_URL=jdbc:postgresql://$DB_URL:$DB_PORT/$DB_NAME
+      - SPRING_DATASOURCE_USERNAME=$DB_USER
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
