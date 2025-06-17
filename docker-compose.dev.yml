@@ -1,0 +1,35 @@
+services:
+  resleriana-api:
+    container_name: resleriana-api-dev
+    env_file: ./.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_PASSWORD=$DB_PASSWORD
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://$DB_URL:$DB_PORT/$DB_NAME
+      - JAKARTA_PERSISTENCE_JDBC_URL=jdbc:postgresql://$DB_URL:$DB_PORT/$DB_NAME
+      - SPRING_DATASOURCE_USERNAME=$DB_USER
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+    networks:
+      - spring-network
+
+  database:
+    hostname: postgres_db
+    restart: always
+    image: postgres:17.5
+    env_file: ./.env
+    expose:
+      - '$DB_PORT'
+    ports:
+      - '$DB_PORT:$DB_PORT'
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - PGPORT=$DB_PORT
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - spring-network
+volumes:
+  dbdata:

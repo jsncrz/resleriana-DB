@@ -1,0 +1,15 @@
+services:
+  resleriana-api:
+    build: .
+    image: "resleriana-api"
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-network
+  
+networks:
+  spring-network:
+    driver: bridge
+
